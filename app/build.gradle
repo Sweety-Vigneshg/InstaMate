@@ -1,0 +1,110 @@
+plugins {
+    id 'com.android.application'
+    id 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+}
+
+android {
+    compileSdk 33
+    buildToolsVersion '33.0.2'
+    defaultConfig {
+        applicationId "com.vickystft.instagram.downloader"
+        minSdkVersion 21
+        targetSdk 33
+        versionCode 2
+        versionName '2.1.4.1'
+        setProperty("archivesBaseName", "InstaMate")
+        namespace 'com.vickystft.instagram.downloader'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //noinspection ChromeOsAbiSupport
+            abiFilters 'armeabi-v7a'
+            //noinspection ChromeOsAbiSupport
+            abiFilters 'arm64-v8a'
+            //noinspection ChromeOsAbiSupport
+            abiFilters 'x86'
+        }
+        configurations.all {
+            resolutionStrategy {
+                force "com.google.android.gms:play-services-basement:17.0.0"
+                force "com.google.android.gms:play-services-base:17.1.0"
+                force "com.google.android.gms:play-services-stats:17.0.0"
+                force "com.google.android.gms:play-services-gcm:17.0.0"
+                force "com.google.android.gms:play-services-ads:19.7.0"
+            }
+        }
+    }
+
+    buildFeatures{
+        buildConfig = true
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    //dexOptions {
+    //    javaMaxHeapSize "4g"
+    //}
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    repositories {
+      //  flatDir {
+      //      dirs 'libs'
+       // }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    ndkVersion '25.2.9519653'
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //noinspection RiskyLibrary
+    implementation 'com.google.android.gms:play-services-ads-lite:19.6.0'
+    //noinspection RiskyLibrary
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.google.firebase:firebase-analytics:21.3.0'
+    implementation 'com.google.firebase:firebase-messaging:23.2.0'
+    implementation 'com.android.billingclient:billing:6.0.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.3.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    implementation 'com.google.android.play:core:1.10.3'
+    implementation 'com.google.firebase:firebase-bom:32.2.0'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.github.florent37:shapeofview:1.3.2'
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+apply plugin: 'com.google.gms.google-services'
